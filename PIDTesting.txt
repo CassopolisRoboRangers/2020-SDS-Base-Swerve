@@ -2,11 +2,11 @@
          //Code to put in java playground for PID looping a drive results
         //based on certain criteria        
         
-        double kP = .01;
-        double kI = .0002;
-        double kD = .005;
+        double kP = .5;
+        double kI = .0;
+        double kD = .0;
         
-        double driveDistance = -20;
+        double driveDistance = 20;
         double kWheelCircumference = Math.PI * 4;
         double targetRevs;
         
@@ -19,7 +19,11 @@
         
         targetRevs = (driveDistance / kWheelCircumference) * 13;
         
-        for(int x = 0; x < targetRevs; x++)
+        System.out.println(targetRevs);
+        System.out.println();
+        System.out.println();
+        
+        for(encoder = 0;  encoder < targetRevs; encoder+=2)
         {
             
         
@@ -38,9 +42,11 @@
         derivative = (error - previous_error) / .02;
         forward = kP * error + kI * integral + kD * derivative;
         
-        System.out.println(forward);
         
-        encoder +=5;
+        
+        System.out.println(error + "     " + forward + "    " + integral + "   " + derivative);
+        
+        
         
         
         }
