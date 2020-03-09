@@ -1,0 +1,35 @@
+        
+        //Code to put in java playground for PID looping a drive results
+        //based on certain criteria        
+        
+        double kP = .01;
+        double kI = .0002;
+        double kD = .005;
+        
+        double driveDistance = -20;
+        double kWheelCircumference = Math.PI * 4;
+        double targetRevs;
+        
+        double error;
+        double integral = 0, previous_error = 0, derivative = 0;
+        double forward = 0;
+        
+        int encoder = 0;
+        
+        
+        targetRevs = (driveDistance / kWheelCircumference) * 13;
+        
+        //positive drive distance / positive error
+        //negative drive distance / negetive error
+        if(driveDistance > 0)
+        {
+            error = Math.abs(targetRevs) - Math.abs(encoder);
+        }
+        else
+        {
+            error = -(Math.abs(targetRevs) - Math.abs(encoder));
+        }
+        
+        integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
+        derivative = (error - previous_error) / .02;
+        forward = kP * error + kI * integral + kD * derivative;
