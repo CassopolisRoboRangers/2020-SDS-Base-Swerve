@@ -1,9 +1,9 @@
         
-         //Code to put in java playground for PID looping a drive results
+        //Code to put in java playground for PID looping a drive results
         //based on certain criteria        
         
         double kP = .5;
-        double kI = .0;
+        double kI = .01;
         double kD = .0;
         
         double driveDistance = 20;
@@ -23,7 +23,8 @@
         System.out.println();
         System.out.println();
         
-        for(encoder = 0;  encoder < targetRevs; encoder+=2)
+        //for(encoder = 0;  encoder < targetRevs; encoder+=1)
+        for(int x = 0; x < 50; x++)
         {
             
         
@@ -44,9 +45,17 @@
         
         
         
-        System.out.println(error + "     " + forward + "    " + integral + "   " + derivative);
+        System.out.println(encoder + "     " + error + "     " + forward + "    " + integral + "   " + derivative);
         
         
+        if(encoder < targetRevs + 3)
+        {
+            encoder += 1;
+        }
+        else if(encoder > targetRevs - 3 )
+        {
+            encoder -= 1;
+        }
         
         
         }
