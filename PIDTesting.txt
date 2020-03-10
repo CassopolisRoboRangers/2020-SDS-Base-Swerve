@@ -21,12 +21,15 @@
         //Setpoint
         targetRevs = (driveDistance / kWheelCircumference) * 13;
         
+        //Print Headers
+        System.out.println("Target");
         System.out.println(targetRevs);
         System.out.println();
         System.out.println();
+        System.out.println("Enc" + "        " + "Error" + "                   " + "Forward" + "              " + "Integral" +                   "           " + "Derivative");
         
         //loop counter to represent time periods
-        for(int x = 0; x < 30; x++)
+        for(int x = 0; x < 22; x++)
         {
                     
                 //positive drive distance / positive error
@@ -47,8 +50,11 @@
                 //Final motion result
                 forward = kP * error + kI * integral + kD * derivative;
 
+                //Print results
                 System.out.println(encoder + "     " + error + "     " + forward + "    " + integral + "   " + derivative);
   
+                //increase encoder
+                encoder += 1;
         }
         
         System.out.println("Hello Java");
