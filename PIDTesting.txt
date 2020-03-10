@@ -48,7 +48,7 @@
                 derivative = (error - previous_error) / .02; //Difference in error over last time period
                 
                 //Final motion result
-                forward = kP * error + kI * integral + kD * derivative;
+                forward = (kP * error) + (kI * integral) + (kD * derivative);
 
                 //Print results
                 System.out.println(encoder + "     " + error + "     " + forward + "    " + integral + "   " + derivative);
