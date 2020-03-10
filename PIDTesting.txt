@@ -2,62 +2,53 @@
         //Code to put in java playground for PID looping a drive results
         //based on certain criteria        
         
-        double kP = .5;
-        double kI = .01;
+        //PID
+        double kP = .1;
+        double kI = .0;
         double kD = .0;
         
+        //Drive variables
         double driveDistance = 20;
         double kWheelCircumference = Math.PI * 4;
         double targetRevs;
-        
-        double error;
-        double integral = 0, previous_error = 0, derivative = 0;
         double forward = 0;
-        
         int encoder = 0;
         
+        //PID calulation variables
+        double error;
+        double integral = 0, previous_error = 0, derivative = 0;
         
+        //Setpoint
         targetRevs = (driveDistance / kWheelCircumference) * 13;
         
         System.out.println(targetRevs);
         System.out.println();
         System.out.println();
         
-        //for(encoder = 0;  encoder < targetRevs; encoder+=1)
-        for(int x = 0; x < 50; x++)
+        //loop counter to represent time periods
+        for(int x = 0; x < 30; x++)
         {
-            
-        
-        //positive drive distance / positive error
-        //negative drive distance / negetive error
-        if(driveDistance > 0)
-        {
-            error = Math.abs(targetRevs) - Math.abs(encoder);
-        }
-        else
-        {
-            error = -(Math.abs(targetRevs) - Math.abs(encoder));
-        }
-        
-        integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
-        derivative = (error - previous_error) / .02;
-        forward = kP * error + kI * integral + kD * derivative;
-        
-        
-        
-        System.out.println(encoder + "     " + error + "     " + forward + "    " + integral + "   " + derivative);
-        
-        
-        if(encoder < targetRevs + 3)
-        {
-            encoder += 1;
-        }
-        else if(encoder > targetRevs - 3 )
-        {
-            encoder -= 1;
-        }
-        
-        
+                    
+                //positive drive distance / positive error
+                //negative drive distance / negetive error
+                if(driveDistance > 0)
+                {
+                    error = Math.abs(targetRevs) - Math.abs(encoder);
+                }
+                else
+                {
+                    error = -(Math.abs(targetRevs) - Math.abs(encoder));
+                }
+
+                //Calculate PID values
+                integral += (error * .02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
+                derivative = (error - previous_error) / .02; //Difference in error over last time period
+                
+                //Final motion result
+                forward = kP * error + kI * integral + kD * derivative;
+
+                System.out.println(encoder + "     " + error + "     " + forward + "    " + integral + "   " + derivative);
+  
         }
         
         System.out.println("Hello Java");
