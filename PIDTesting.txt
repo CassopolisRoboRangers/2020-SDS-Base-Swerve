@@ -55,6 +55,9 @@
   
                 //increase encoder
                 encoder += 1;
+                
+                //Save last error
+                previous_error = error;
         }
         
         System.out.println("Hello Java");
